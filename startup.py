@@ -30,7 +30,7 @@ class ReinBot(commands.Bot):
         intents: Optional[discord.Intents] = discord.Intents.all(),
         **kwargs,
     ):
-        super().__init__(command_prefix = ".", *args, intents=intents, **kwargs)
+        super().__init__(command_prefix=".", *args, intents=intents, **kwargs)
         self.db_pool = db_pool
         self.web_client = web_client
         self.testing_guild_id = testing_guild_id
@@ -41,11 +41,11 @@ class ReinBot(commands.Bot):
             try: 
                 await self.load_extension(extensions)
                 print(f"{extensions} loaded!")
-            except:
-                print(f"failed to load {extensions}")
+            except Exception as e:
+                log.exception('Failed to load extension %s.', extension)
     
     async def on_ready(self) -> None:
-        print(f"Logged in as {bot.user} (ID: {bot.user.id})")
+        print(f"Logged in as {self.user} (ID: {self.user.id})")
         print('--------')
 
 async def main():
