@@ -16,5 +16,10 @@ class _commands(commands.Cog):
     async def ping(self, ctx): 
         await ctx.send(f'Pong! In `{round(self.bot.latency * 1000)}ms`')
 
+    @commands.Cog.listener()
+    async def on_message(self, message): 
+        if self.bot.user.mentioned_in(message): 
+            await message.reply("prefix defined `.`")
+
 async def setup(bot):
     await bot.add_cog(_commands(bot))
